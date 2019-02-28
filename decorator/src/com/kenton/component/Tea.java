@@ -8,10 +8,7 @@ public class Tea extends BaseBeverage  {
     public Tea(){
         description="抹茶";
     }
-    @Override
-    public String getDescription() {
-        return super.getDescription();
-    }
+
 
     @Override
     public double cost() {

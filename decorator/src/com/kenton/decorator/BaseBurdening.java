@@ -8,12 +8,7 @@ import com.kenton.component.BaseBeverage;
  * @date 2019/2/27
  */
 public abstract class BaseBurdening  extends BaseBeverage {
-    /**
-     *  配料的描述
-     * @return  description
-     */
-    @Override
-    public abstract String getDescription();
+
 
     /**
      *  配料的花费

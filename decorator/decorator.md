@@ -1,11 +1,13 @@
 # 装饰者模式
 ## 奶茶店的例子
-奶茶店里有许多品类的奶茶，比如：烧仙草奶茶，四季春茶，四季奶青，金桔柠檬，波霸奶茶，芒果沙冰等等。而且，根据客户的不同需求，冰的多少，糖度等，所生产的商品也会不一致。如果让这些不同口味饮品都继承子一个父类Component，那么随着饮品种类的增多，代表着这些饮品种类的实体类也会越来越多。
-同时，上述的饮品还可以大致分为三个种类：奶茶类，茶类，沙冰类。根据配料的不同，比如，糖度，冰的多少，奶茶店所花费的成本也不同。
-为此，我们就需要根据客户的不同需求来组合饮品、糖度、冰量来生产饮料
+奶茶店里有许多品类的奶茶，比如：烧仙草奶茶，四季春茶，四季奶青，金桔柠檬，波霸奶茶，芒果沙冰等等。而且，根据客户的不同需求，冰的多少，甜度等，所生产的商品以及生产这些商品的成本也会不一致。如果让这些不同口味饮品都继承子一个父类Component，那么随着饮品种类的增多，代表着这些饮品种类的实体类也会越来越多。
+假设饮料有m种，甜度可选范围有n种，那么我们必须要准备m*n个实体类，而且每增加一款饮品，就必须增加n个代表不同甜度的实体类。
+
+分析:上述的饮品还可以大致分为三个种类：奶茶类，茶类，沙冰类。根据配料的不同(比如:甜度，冰的多少,原材料等)奶茶店所花费的成本也不同。
+为此，我们就需要根据客户的不同需求来组合饮品、甜度、冰量、原材料来生产饮料
 ## 装饰者模式类图
 ![类图](src/img/20190227223528564_11742.png)    
-在上述例子中，所有的奶茶（ConcreteComponentA）、茶（ConcreteComponentB）、沙冰（ConcreteComponentC）、配料(BaseDecorator)都继承自饮品类（BaseComponent），而配料又分为糖度（ConcreteDecoratorA）、冰量（ConcreteDecoratorA）。此处，糖度、冰量就可以充当装饰者，来装饰饮品。  
+在上述例子中，所有的奶茶（ConcreteComponentA）、茶（ConcreteComponentB）、沙冰（ConcreteComponentC）、配料(BaseDecorator)都继承自饮品类（BaseComponent），而配料又分为甜度（ConcreteDecoratorA）、冰量（ConcreteDecoratorA）。此处，甜度、冰量就可以充当装饰者，来装饰饮品。  
 ### 代码实现
 抽象类：饮品：是具体饮料和配料的父类  
 
@@ -36,11 +38,6 @@ public class Tea extends BaseBeverage  {
         description="抹茶";
     }
     @Override
-    public String getDescription() {
-        return super.getDescription();
-    }
-
-    @Override
     public double cost() {
         return 5;
     }
@@ -50,12 +47,6 @@ public class Tea extends BaseBeverage  {
 
 ```java
 public abstract class BaseBurdening  extends BaseBeverage {
-    /**
-     *  配料的描述
-     * @return  description
-     */
-    @Override
-    public abstract String getDescription();
 
     /**
      *  配料的花费
@@ -94,7 +85,7 @@ public class Ice extends BaseBurdening {
 ```
 配料：冰块  
 
-``` java
+```java
 public class Sugar extends BaseBurdening {
     private BaseBeverage baseBeverage;
     public Sugar( BaseBeverage baseBeverage ){
